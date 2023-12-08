@@ -25,10 +25,10 @@ const CameraScreen = ({ navigation }) => {
     };
 
     useEffect(() => {
-        async () => {
+        (async () => {
             const { status } = await Camera.requestCameraPermissionsAsync();
             setHasPermission(status === 'granted');
-        };
+        })();
     }, []);
 
     if (hasPermission === null) {
