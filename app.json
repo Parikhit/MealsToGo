@@ -1,38 +1,36 @@
 {
-  "expo": {
-    "name": "XpressMeals",
-    "slug": "XpressMeals",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
-    "splash": {
-      "image": "./assets/splash.jpg",
-      "resizeMode": "cover",
-      "backgroundColor": "#ffffff"
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/icon.png",
-        "backgroundColor": "#ffffff"
-      }
-    },
-    "extra": {
-      "eas": {
-        "projectId": "f349e349-a9d6-4920-a8a1-ad38807eb7fc"
-      }
-    },
-    "runtimeVersion": {
-      "policy": "appVersion"
-    },
-    "updates": {
-      "url": "https://u.expo.dev/f349e349-a9d6-4920-a8a1-ad38807eb7fc"
+    "expo": {
+        "name": "XpressMeals",
+        "slug": "XpressMeals",
+        "version": "1.0.0",
+        "orientation": "portrait",
+        "icon": "./assets/icon/icon.png",
+        "userInterfaceStyle": "light",
+        "splash": {
+            "image": "./assets/splash.jpg",
+            "resizeMode": "cover",
+            "backgroundColor": "#ffffff"
+        },
+        "assetBundlePatterns": ["**/*"],
+        "ios": {
+            "supportsTablet": true
+        },
+        "android": {
+            "adaptiveIcon": {
+                "foregroundImage": "./assets/icon/icon.png",
+                "backgroundColor": "#ffffff"
+            }
+        },
+        "extra": {
+            "eas": {
+                "projectId": "f349e349-a9d6-4920-a8a1-ad38807eb7fc"
+            }
+        },
+        "runtimeVersion": {
+            "policy": "appVersion"
+        },
+        "updates": {
+            "url": "https://u.expo.dev/f349e349-a9d6-4920-a8a1-ad38807eb7fc"
+        }
     }
-  }
 }
