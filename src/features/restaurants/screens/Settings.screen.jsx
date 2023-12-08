@@ -1,4 +1,4 @@
-import React, { useContext, useState, useCallback } from 'react';
+import React, { useContext, useState } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native';
 import { List, Avatar } from 'react-native-paper';
@@ -26,9 +26,11 @@ const SettingsScreen = ({ navigation }) => {
         setPhoto(photoUri);
     };
 
-    useFocusEffect(useCallback(() => {
-        getProfilePicture(user);
-    }, [user]));
+    useFocusEffect(
+        React.useCallback(() => {
+            getProfilePicture(user);
+        }, [user])
+    );
 
     return (
         <SafeArea>
@@ -40,7 +42,11 @@ const SettingsScreen = ({ navigation }) => {
                 >
                     {!photo && <Avatar.Icon size={180} icon='human' backgroundColor='#2182BD' />}
                     {photo && (
-                        <Avatar.Icon size={180} source={{ uri: photo }} backgroundColor='#2182BD' />
+                        <Avatar.Image
+                            size={180}
+                            source={{ uri: photo }}
+                            backgroundColor='#2182BD'
+                        />
                     )}
                 </TouchableOpacity>
                 <Spacer position='top' size='large'>

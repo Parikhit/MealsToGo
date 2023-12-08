@@ -17,7 +17,7 @@ const CameraScreen = ({ navigation }) => {
     const { user } = useContext(AuthenticationContext);
 
     const snap = async () => {
-        if (cameraRef) {
+        if (cameraRef && cameraRef.current) {
             const photo = await cameraRef.current.takePictureAsync();
             AsyncStorage.setItem(`${user.uid}-photo`, photo.uri);
             navigation.goBack();
@@ -34,18 +34,19 @@ const CameraScreen = ({ navigation }) => {
     if (hasPermission === null) {
         return <View />;
     }
+    ``;
     if (hasPermission === false) {
         return <Text>No access to camera</Text>;
     }
 
     return (
-        <TouchableOpacity onPress={snap}>
-            <ProfileCamera
-                ref={(camera) => (cameraRef.current = camera)}
-                type={Camera.Constants.Type.front}
-                ratio='16:9'
-            ></ProfileCamera>
-        </TouchableOpacity>
+        <ProfileCamera
+            ref={(camera) => (cameraRef.current = camera)}
+            type={Camera.Constants.Type.front}
+            ratio='16:9'
+        >
+            <TouchableOpacity onPress={snap} style={{ height: '100%', width: '100%' }} />
+        </ProfileCamera>
     );
 };
 
