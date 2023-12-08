@@ -1,10 +1,13 @@
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+// import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import RestaurantNavigator from './restaurants.navigator';
+import SettingsNavigator from './settings.navigator';
 import MapsScreen from '../../features/map/screens/Maps.screen';
-import SettingsScreen from '../../features/restaurants/screens/Settings.screen';
+import { FavouritesProvider } from '../../services/favourites/favourites.context';
+import { RestaurantsProvider } from '../../services/restaurants/restaurants.context';
+import { LocationProvider } from '../../services/location/location.context';
 
 const Tab = createBottomTabNavigator();
 
@@ -23,23 +26,35 @@ const createScreenOptions = ({ route }) => {
 };
 
 const AppNavigator = () => (
-    <NavigationContainer>
-        <Tab.Navigator
-            screenOptions={createScreenOptions}
-            tabBarOptions={{
-                activeTintColor: 'tomato',
-                inactiveTintColor: 'gray',
-            }}
-        >
-            <Tab.Screen
-                name='Restaurants'
-                options={{ headerShown: false }}
-                component={RestaurantNavigator}
-            />
-            <Tab.Screen name='Maps' options={{ headerShown: false }} component={MapsScreen} />
-            <Tab.Screen name='Settings' component={SettingsScreen} />
-        </Tab.Navigator>
-    </NavigationContainer>
+    <FavouritesProvider>
+        <LocationProvider>
+            <RestaurantsProvider>
+                <Tab.Navigator
+                    screenOptions={createScreenOptions}
+                    tabBarOptions={{
+                        activeTintColor: 'tomato',
+                        inactiveTintColor: 'gray',
+                    }}
+                >
+                    <Tab.Screen
+                        name='Restaurants'
+                        options={{ headerShown: false }}
+                        component={RestaurantNavigator}
+                    />
+                    <Tab.Screen
+                        name='Maps'
+                        options={{ headerShown: false }}
+                        component={MapsScreen}
+                    />
+                    <Tab.Screen
+                        name='Settings'
+                        options={{ headerShown: false }}
+                        component={SettingsNavigator}
+                    />
+                </Tab.Navigator>
+            </RestaurantsProvider>
+        </LocationProvider>
+    </FavouritesProvider>
 );
 
 export default AppNavigator;

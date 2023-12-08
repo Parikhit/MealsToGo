@@ -1,18 +1,19 @@
-import { useContext } from 'react';
-import { FlatList, TouchableOpacity } from 'react-native';
+import { useContext, useState } from 'react';
+import { TouchableOpacity } from 'react-native';
 import React from 'react';
-import { SafeArea } from '../../../utility-components/safe-area.component';
+import { SafeArea } from '../../../utility-components/safe-area/safe-area.component';
+import FadeInView from '../../../utility-components/animations/fade.animation';
 import RestaurantInfoCard from '../components/Restaurant-Info-Card.component';
 import Spacer from '../../../utility-components/spacer/spacer.component';
 import styled from 'styled-components';
 
 import Search from '../components/Search.component';
 import { RestaurantsContext } from '../../../services/restaurants/restaurants.context';
-import { ActivityIndicator, MD2Colors } from 'react-native-paper';
+import { FavouritesContext } from '../../../services/favourites/favourites.context';
+import FavouritesBar from '../../../utility-components/favourites/favourites-bar.component';
 
-const RestaurantList = styled(FlatList).attrs({
-    contentContainerStyle: { padding: 16 },
-})``;
+import { ActivityIndicator, MD2Colors } from 'react-native-paper';
+import { RestaurantList } from '../components/restaurant-list.styles';
 
 const Loading = styled(ActivityIndicator)`
     margin-left: -25px;
@@ -26,6 +27,8 @@ const LoadingContainer = styled.View`
 
 const RestaurantsScreen = ({ navigation }) => {
     const { isLoading, restaurants } = useContext(RestaurantsContext);
+    const { favourites } = useContext(FavouritesContext);
+    const [isToggled, setIsToggled] = useState(false);
 
     return (
         <SafeArea>
@@ -39,7 +42,16 @@ const RestaurantsScreen = ({ navigation }) => {
                     />
                 </LoadingContainer>
             )}
-            <Search />
+
+            <Search
+                isFavouritesToggled={isToggled}
+                onFavouritesToggled={() => setIsToggled(!isToggled)}
+            />
+
+            {isToggled && (
+                <FavouritesBar favourites={favourites} onNavigate={navigation.navigate} />
+            )}
+
             <RestaurantList
                 data={restaurants}
                 renderItem={({ item }) => {
@@ -52,7 +64,9 @@ const RestaurantsScreen = ({ navigation }) => {
                             }
                         >
                             <Spacer position='bottom' size='large'>
-                                <RestaurantInfoCard restaurant={item} />
+                                <FadeInView>
+                                    <RestaurantInfoCard restaurant={item} />
+                                </FadeInView>
                             </Spacer>
                         </TouchableOpacity>
                     );

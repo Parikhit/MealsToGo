@@ -3,7 +3,7 @@ import { ScrollView } from 'react-native';
 import { useState } from 'react';
 import RestaurantInfoCard from '../components/Restaurant-Info-Card.component';
 import { List } from 'react-native-paper';
-import { SafeArea } from '../../../utility-components/safe-area.component';
+import { SafeArea } from '../../../utility-components/safe-area/safe-area.component';
 
 const RestaurantDetailScreen = ({ route }) => {
     const [breakfastExpanded, setBreakfastExpanded] = useState(false);
